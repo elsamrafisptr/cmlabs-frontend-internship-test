@@ -6,13 +6,14 @@
     <title>Homepage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/src/styles/output.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body class="bg-gray-50">
     <header
-      class="sticky top-0 z-50 flex w-full items-center justify-between border-b bg-white px-4 py-4 md:px-12 lg:px-24"
+      class="sticky top-0 z-50 flex w-full items-center justify-between border-b bg-white px-6 py-4 md:px-12 lg:px-24"
     >
-      <a href="" class="hidden items-center lg:flex lg:gap-6"
-        ><svg
+      <a href="" class="hidden items-center lg:flex lg:gap-6">
+        <svg
           id="logo-54"
           width="50%"
           height="50%"
@@ -71,32 +72,33 @@
             d="M20.6841 40.138C31.7298 40.138 40.6841 31.1837 40.6841 20.138C40.6841 9.09234 31.7298 0.138031 20.6841 0.138031C9.63837 0.138031 0.684082 9.09234 0.684082 20.138C0.684082 31.1837 9.63837 40.138 20.6841 40.138ZM26.9234 9.45487C27.2271 8.37608 26.1802 7.73816 25.2241 8.41933L11.8772 17.9276C10.8403 18.6663 11.0034 20.138 12.1222 20.138L15.6368 20.138V20.1108H22.4866L16.9053 22.0801L14.4448 30.8212C14.1411 31.9 15.1879 32.5379 16.1441 31.8567L29.491 22.3485C30.5279 21.6098 30.3647 20.138 29.246 20.138L23.9162 20.138L26.9234 9.45487Z"
             class="ccustom"
             fill="rgb(21 128 61)"
-          ></path></svg
-      ></a>
-      <nav class="hidden items-center gap-6 lg:flex lg:gap-6">
+          ></path>
+        </svg>
+      </a>
+      <nav class="hidden items-center gap-6 font-medium lg:flex lg:gap-6">
         <a
           href="/src/pages/ListCategoriesPage.html"
-          class="flex flex-col items-center justify-center hover:bg-gray-100"
+          class="flex flex-col items-center justify-center hover:text-green-700"
         >
-          <p class="text-sm">Home</p>
+          Home
         </a>
         <a
           href="/src/pages/AllCategories.html"
-          class="flex flex-col items-center justify-center hover:bg-gray-100"
+          class="flex flex-col items-center justify-center hover:text-green-700"
         >
-          <p class="text-sm">Categories</p>
+          Categories
         </a>
         <a
           href="/src/pages/AllMeals.html"
-          class="flex flex-col items-center justify-center hover:bg-gray-100"
+          class="flex flex-col items-center justify-center hover:text-green-700"
         >
-          <p class="text-sm">Meals</p>
+          Meals
         </a>
         <a
           href="/src/pages/ListCategoriesPage.html"
-          class="flex flex-col items-center justify-center hover:bg-gray-100"
+          class="flex flex-col items-center justify-center hover:text-green-700"
         >
-          <p class="text-sm">Profile</p>
+          Profile
         </a>
       </nav>
       <div
@@ -148,9 +150,7 @@
 
     <main class="container mx-auto px-4 pb-20 pt-6 md:px-6">
       <section class="relative flex items-center gap-4">
-        <div class="h-40 w-full rounded bg-green-700"></div>
-        <div class="hidden h-40 w-full rounded bg-green-700 lg:block"></div>
-        <div class="hidden h-40 w-full rounded bg-green-700 lg:block"></div>
+        <div class="h-40 w-full rounded bg-gradient-to-tr from-green-700 to-green-500 md:h-52"></div>
         <input
           type="text"
           placeholder="Search your meal name"
@@ -163,7 +163,7 @@
           <h1 class="text-center text-lg font-bold">Recommended Categories</h1>
           <a
             href="/src/pages/AllCategories.html"
-            class="text-sm text-gray-600 underline underline-offset-2 transition-colors duration-150 hover:text-blue-500"
+            class="text-sm text-green-600 underline underline-offset-2 transition-colors duration-150 hover:text-green-700"
             >View All</a
           >
         </div>
@@ -178,7 +178,7 @@
           <h1 class="text-center text-lg font-bold">Meal Overview</h1>
           <a
             href="/src/pages/AllMeals.html"
-            class="text-sm text-gray-600 underline underline-offset-2 transition-colors duration-150 hover:text-blue-500"
+            class="text-sm text-green-600 underline underline-offset-2 transition-colors duration-150 hover:text-green-700"
             >View All</a
           >
         </div>
@@ -279,11 +279,38 @@
       </a>
     </footer>
 
+    <button
+      id="back-to-top"
+      class="fixed bottom-[72px] right-4 hidden rounded-full bg-green-600 p-2.5 text-white shadow-md hover:bg-green-700 md:bottom-8 md:right-12"
+      onclick="scrollToTop()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-4 md:size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+        />
+      </svg>
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/src/api/api.js"></script>
     <script src="/src/components/CategoryCard.js"></script>
     <script src="/src/components/MealCard.js"></script>
     <script src="/src/utils/helpers.js"></script>
+    <script src="/src/components/BackToTheTop.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
     <script>
       function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -298,7 +325,7 @@
 
         const cek = shuffleArray(categories);
 
-        categories.splice(0, 4).forEach((category) => {
+        categories.splice(0, 6).forEach((category) => {
           const card = createCategoryCard(category);
           categoryList.appendChild(card);
         });
@@ -310,8 +337,8 @@
         const mealList = document.getElementById("meal-list-homepage");
         const meals = await fetchMealsByCategory("Beef");
 
-        meals.splice(0, 4).forEach((meal) => {
-          const card = createMealCard(meal);
+        meals.splice(0, 10).forEach((meal) => {
+          const card = createMealCard(meal, "Beef");
           mealList.appendChild(card);
         });
       });
