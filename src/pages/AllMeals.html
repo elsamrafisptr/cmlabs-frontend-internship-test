@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Meals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/styles/output.css" />
+  </head>
+  <body class="pb-20">
+    <header
+      class="sticky top-0 z-50 flex w-full items-center justify-between gap-4 border-b bg-white p-4"
+    >
+      <button onclick="history.back()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-6 w-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+          />
+        </svg>
+      </button>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search meals by name"
+        class="h-12 w-full rounded border px-4"
+      />
+    </header>
+
+    <main class="container mx-auto mt-4 px-4">
+      <section>
+        <div class="flex items-center justify-between py-4">
+          <h1 class="text-center text-xl font-bold">All Meals</h1>
+        </div>
+        <!-- Add a loading spinner -->
+        <div id="loading-spinner" class="my-4 flex items-center justify-center">
+          <p class="text-lg">Loading meals, please wait...</p>
+        </div>
+        <div id="meal-list" class="grid grid-cols-2 gap-4 md:grid-cols-4"></div>
+        <div class="mt-6 flex justify-center">
+          <button
+            id="load-more"
+            class="rounded bg-blue-500 px-4 py-2 text-white"
+          >
+            Load More
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="fixed bottom-0 grid h-16 w-full grid-cols-4 border-t bg-white"
+    >
+      <a
+        href="/src/pages/ListCategoriesPage.html"
+        class="flex flex-col items-center justify-center hover:bg-gray-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+          />
+        </svg>
+        <p class="text-sm">Home</p>
+      </a>
+      <a
+        href="/src/pages/AllCategories.html"
+        class="flex flex-col items-center justify-center hover:bg-gray-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 6h.008v.008H6V6Z"
+          />
+        </svg>
+        <p class="text-sm">Categories</p>
+      </a>
+      <a
+        href="/src/pages/AllMeals.html"
+        class="flex flex-col items-center justify-center hover:bg-gray-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z"
+          />
+        </svg>
+        <p class="text-sm">Meals</p>
+      </a>
+      <a
+        href="/src/pages/ListCategoriesPage.html"
+        class="flex flex-col items-center justify-center hover:bg-gray-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+          />
+        </svg>
+        <p class="text-sm">Profile</p>
+      </a>
+    </footer>
+
+    <button
+      id="back-to-top"
+      class="fixed bottom-[72px] right-4 hidden rounded-full bg-green-600 p-2.5 text-white shadow-md hover:bg-blue-600"
+      onclick="scrollToTop()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-4"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+        />
+      </svg>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/src/api/api.js"></script>
+    <script src="/src/components/MealCard.js"></script>
+    <script src="/src/components/BackToTheTop.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const mealList = document.getElementById("meal-list");
+        const searchInput = document.getElementById("search-input");
+        const loadMoreBtn = document.getElementById("load-more");
+        const loadingSpinner = document.getElementById("loading-spinner");
+
+        let allMeals = [];
+        let displayedMeals = 0;
+        const mealsPerPage = 8;
+
+        async function fetchMeals() {
+          loadingSpinner.style.display = "flex";
+          try {
+            const categories = await fetchCategories();
+            for (const category of categories) {
+              const meals = await fetchMealsByCategory(category.strCategory);
+              allMeals = [...allMeals, ...meals];
+            }
+            shuffleArray(allMeals);
+            renderMeals();
+          } catch (error) {
+            console.error("Error fetching meals:", error);
+          } finally {
+            loadingSpinner.style.display = "none";
+          }
+        }
+
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        }
+
+        function renderMeals(filteredMeals = allMeals) {
+          const mealsToDisplay = filteredMeals.slice(
+            displayedMeals,
+            displayedMeals + mealsPerPage,
+          );
+
+          mealsToDisplay.forEach((meal) => {
+            const card = createMealCard(meal);
+            mealList.appendChild(card);
+          });
+
+          displayedMeals += mealsPerPage;
+
+          if (displayedMeals >= filteredMeals.length) {
+            loadMoreBtn.style.display = "none";
+          } else {
+            loadMoreBtn.style.display = "block";
+          }
+        }
+
+        function handleSearch() {
+          const searchValue = searchInput.value.trim().toLowerCase();
+          const filteredMeals = allMeals.filter((meal) =>
+            meal.strMeal.toLowerCase().includes(searchValue),
+          );
+
+          mealList.innerHTML = "";
+          displayedMeals = 0;
+
+          renderMeals(filteredMeals);
+        }
+
+        searchInput.addEventListener("input", debounce(handleSearch, 300));
+        loadMoreBtn.addEventListener("click", () => renderMeals());
+
+        function debounce(func, delay) {
+          let timeout;
+          return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), delay);
+          };
+        }
+
+        await fetchMeals();
+      });
+    </script>
+  </body>
+</html>
