@@ -14,6 +14,9 @@ const createMealCard = (meal, categoryName) => {
     "h-fit",
   );
 
+  card.setAttribute("data-aos", "fade-up");
+  card.setAttribute("data-aos-duration", "700");
+
   card.innerHTML = `
     <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="w-full rounded">
     <div class="flex flex-col items-center justify-center mt-2">
